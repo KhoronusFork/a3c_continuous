@@ -8,7 +8,7 @@ from utils import setup_logger
 from model import A3C_CONV, A3C_MLP
 from player_util import Agent
 from torch.autograd import Variable
-import gym
+import gymnasium as gym
 import logging
 
 

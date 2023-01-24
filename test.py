@@ -9,7 +9,7 @@ from player_util import Agent
 from torch.autograd import Variable
 import time
 import logging
-import gym
+import gymnasium as gym
 
 
 def test(args, shared_model):

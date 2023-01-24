@@ -8,7 +8,7 @@ from utils import ensure_shared_grads
 from model import A3C_CONV, A3C_MLP
 from player_util import Agent
 from torch.autograd import Variable
-import gym
+import gymnasium as gym
 
 
 def train(rank, args, shared_model, optimizer):
@@ -24,7 +24,6 @@ def train(rank, args, shared_model, optimizer):
         if args.optimizer == 'Adam':
             optimizer = optim.Adam(shared_model.parameters(), lr=args.lr)
 
-    env.seed(args.seed + rank)
     player = Agent(None, env, args, None)
     player.gpu_id = gpu_id
     if args.model == 'MLP':

@@ -57,9 +57,9 @@ parser.add_argument(
     help='maximum length of an episode (default: 10000)')
 parser.add_argument(
     '--env',
-    default='BipedalWalker-v2',
+    default='HalfCheetah-v4',
     metavar='ENV',
-    help='environment to train on (default: BipedalWalker-v2)')
+    help='environment to train on (default: HalfCheetah-v4)')
 parser.add_argument(
     '--shared-optimizer',
     default=True,

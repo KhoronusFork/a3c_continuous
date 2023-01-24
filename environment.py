@@ -1,5 +1,5 @@
 from __future__ import division
-import gym
+import gymnasium as gym
 import numpy as np
 from collections import deque
 from gym import spaces
@@ -20,7 +20,7 @@ class frame_stack(gym.Wrapper):
 
 
     def reset(self):
-        ob = self.env.reset()
+        ob, info = self.env.reset()
         ob = np.float32(ob)
         ob = self.obs_norm(ob)
         for _ in range(self.stack_frames):
@@ -28,7 +28,7 @@ class frame_stack(gym.Wrapper):
         return self.observation()
 
     def step(self, action):
-        ob, rew, done, info = self.env.step(action)
+        ob, rew, done, truncated, info = self.env.step(action)
         ob = np.float32(ob)
         ob = self.obs_norm(ob)
         self.frames.append(ob)
