@@ -32,7 +32,7 @@ def test(args, shared_model):
     start_time = time.time()
     num_tests = 0
     reward_total_sum = 0
-    player = Agent(None, env, args, None)
+    player = Agent(0, None, env, args, None)
     player.gpu_id = gpu_id
     if args.model == 'MLP':
         player.model = A3C_MLP(

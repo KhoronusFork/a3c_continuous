@@ -1,4 +1,8 @@
 from __future__ import print_function, division
+
+from warnings import filterwarnings
+filterwarnings(action='ignore', category=DeprecationWarning, message='`np.bool` is a deprecated alias')
+
 import os
 os.environ["OMP_NUM_THREADS"] = "1"
 import argparse
@@ -10,7 +14,6 @@ from train import train
 from test import test
 from shared_optim import SharedRMSprop, SharedAdam
 import time
-
 
 parser = argparse.ArgumentParser(description='A3C')
 parser.add_argument(

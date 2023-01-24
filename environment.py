@@ -2,11 +2,10 @@ from __future__ import division
 import gymnasium as gym
 import numpy as np
 from collections import deque
-from gym import spaces
-
+from gymnasium import spaces
 
 def create_env(env_id, args):
-    env = gym.make(env_id)
+    env = gym.make(env_id, render_mode = 'rgb_array')
     env = frame_stack(env, args)
     return env
 
@@ -32,7 +31,8 @@ class frame_stack(gym.Wrapper):
         ob = np.float32(ob)
         ob = self.obs_norm(ob)
         self.frames.append(ob)
-        return self.observation(), rew, done, info
+        #return self.observation(), rew, done, info
+        return self.observation(), info['reward_ctrl'] + info['reward_run'] / 20, done, info
 
     def observation(self):
         assert len(self.frames) == self.stack_frames

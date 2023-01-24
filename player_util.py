@@ -5,10 +5,11 @@ import torch
 import torch.nn.functional as F
 from torch.autograd import Variable
 from utils import normal  # , pi
-
+import cv2
 
 class Agent(object):
-    def __init__(self, model, env, args, state):
+    def __init__(self, rank, model, env, args, state):
+        self.rank = rank
         self.model = model
         self.env = env
         self.state = state
@@ -53,6 +54,12 @@ class Agent(object):
         self.log_probs.append(log_prob)
         state, reward, self.done, self.info = self.env.step(
             action.cpu().numpy()[0])
+        if self.rank == 0:
+            # visualize (debug)
+            frame = self.env.render()
+            cv2.imshow('a3c', frame)
+            cv2.waitKey(1)
+
         reward = max(min(float(reward), 1.0), -1.0)
         self.state = torch.from_numpy(state).float()
         if self.gpu_id >= 0:

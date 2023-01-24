@@ -24,7 +24,7 @@ def train(rank, args, shared_model, optimizer):
         if args.optimizer == 'Adam':
             optimizer = optim.Adam(shared_model.parameters(), lr=args.lr)
 
-    player = Agent(None, env, args, None)
+    player = Agent(rank, None, env, args, None)
     player.gpu_id = gpu_id
     if args.model == 'MLP':
         player.model = A3C_MLP(
